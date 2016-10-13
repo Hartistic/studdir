@@ -67,7 +67,7 @@ BOOL Female;
     }
     else
     {
-        _genderStatusLabel.text = @"";
+        _genderStatusLabel.text = @"You will see a blank screen";
         Male = 0;
         Female = 0;
     }

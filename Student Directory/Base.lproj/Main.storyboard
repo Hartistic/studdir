@@ -154,61 +154,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Male Students:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwi-EG-cIX">
-                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="19"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rrn-Uf-Li0">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Male Students:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwi-EG-cIX">
+                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lx-AN-ASP">
+                                        <connections>
+                                            <action selector="maleSwitchAction:" destination="pHS-aC-cpQ" eventType="valueChanged" id="8cp-GS-pXz"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFp-5C-KEw">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Ny3-dE-83C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lx-AN-ASP">
-                                <connections>
-                                    <action selector="maleSwitchAction:" destination="pHS-aC-cpQ" eventType="valueChanged" id="8cp-GS-pXz"/>
-                                </connections>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-wd-G2c">
-                                <connections>
-                                    <action selector="femaleSwitchAction:" destination="pHS-aC-cpQ" eventType="valueChanged" id="EKp-8j-Q0H"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female Students:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXm-fh-tJm">
-                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="19"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvk-nC-t9u">
-                                <frame key="frameInset" minX="16" minY="187" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-UltraLightItalic" family="Avenir Next" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-YR-80d">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female Students:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXm-fh-tJm">
+                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-wd-G2c">
+                                        <connections>
+                                            <action selector="femaleSwitchAction:" destination="pHS-aC-cpQ" eventType="valueChanged" id="EKp-8j-Q0H"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Iwi-EG-cIX" firstAttribute="top" secondItem="Xsl-iA-h1I" secondAttribute="bottom" constant="17" id="5Jr-eQ-XT9"/>
-                            <constraint firstItem="Arc-wd-G2c" firstAttribute="top" secondItem="6Lx-AN-ASP" secondAttribute="bottom" constant="13" id="9ie-uY-hcV"/>
-                            <constraint firstItem="HXm-fh-tJm" firstAttribute="centerY" secondItem="Arc-wd-G2c" secondAttribute="centerY" id="Bgo-Yv-fiS"/>
-                            <constraint firstItem="6Lx-AN-ASP" firstAttribute="leading" secondItem="Iwi-EG-cIX" secondAttribute="trailing" constant="8" symbolic="YES" id="FtL-lp-QFL"/>
-                            <constraint firstItem="Iwi-EG-cIX" firstAttribute="centerY" secondItem="6Lx-AN-ASP" secondAttribute="centerY" id="LFI-5O-Xye"/>
-                            <constraint firstItem="6Lx-AN-ASP" firstAttribute="top" secondItem="Xsl-iA-h1I" secondAttribute="bottom" constant="12" id="QFC-5J-Xgi"/>
-                            <constraint firstItem="PnM-mn-jng" firstAttribute="top" secondItem="Arc-wd-G2c" secondAttribute="bottom" constant="516" id="VNX-V4-IRK"/>
-                            <constraint firstItem="6Lx-AN-ASP" firstAttribute="leading" secondItem="Arc-wd-G2c" secondAttribute="leading" id="g65-Nt-s0u"/>
-                            <constraint firstItem="Arc-wd-G2c" firstAttribute="leading" secondItem="HXm-fh-tJm" secondAttribute="trailing" constant="8" symbolic="YES" id="jve-LA-YXL"/>
-                            <constraint firstItem="Iwi-EG-cIX" firstAttribute="leading" secondItem="HXm-fh-tJm" secondAttribute="leading" id="kie-el-Twq"/>
-                            <constraint firstItem="6Lx-AN-ASP" firstAttribute="trailing" secondItem="J9A-Au-8Ee" secondAttribute="trailingMargin" id="rVe-mD-w2p"/>
-                            <constraint firstItem="HXm-fh-tJm" firstAttribute="top" secondItem="Iwi-EG-cIX" secondAttribute="bottom" constant="22" id="s8s-dc-eyr"/>
-                            <constraint firstItem="Iwi-EG-cIX" firstAttribute="leading" secondItem="J9A-Au-8Ee" secondAttribute="leadingMargin" id="xXR-xA-Lwl"/>
+                            <constraint firstItem="Rrn-Uf-Li0" firstAttribute="leading" secondItem="J9A-Au-8Ee" secondAttribute="leadingMargin" constant="5" id="2tP-1J-hPJ"/>
+                            <constraint firstItem="bFp-5C-KEw" firstAttribute="top" secondItem="Rrn-Uf-Li0" secondAttribute="bottom" constant="20" id="4d5-aS-Tp6"/>
+                            <constraint firstItem="Rrn-Uf-Li0" firstAttribute="leading" secondItem="J9A-Au-8Ee" secondAttribute="leadingMargin" constant="5" id="7ue-Pp-hR4"/>
+                            <constraint firstItem="CsG-YR-80d" firstAttribute="top" secondItem="Xsl-iA-h1I" secondAttribute="bottom" constant="20" id="85G-2S-8VC"/>
+                            <constraint firstItem="bFp-5C-KEw" firstAttribute="leading" secondItem="CsG-YR-80d" secondAttribute="leading" id="E65-48-1Ah"/>
+                            <constraint firstItem="bFp-5C-KEw" firstAttribute="trailing" secondItem="CsG-YR-80d" secondAttribute="trailing" id="ISr-UW-Ddj"/>
+                            <constraint firstItem="CsG-YR-80d" firstAttribute="centerX" secondItem="J9A-Au-8Ee" secondAttribute="centerX" id="OJc-Oo-ftH"/>
+                            <constraint firstItem="CsG-YR-80d" firstAttribute="leading" secondItem="J9A-Au-8Ee" secondAttribute="leadingMargin" constant="5" id="ZOp-4U-Mzg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CsG-YR-80d" secondAttribute="trailing" constant="5" id="bzk-m0-Ydi"/>
+                            <constraint firstItem="Rrn-Uf-Li0" firstAttribute="top" secondItem="CsG-YR-80d" secondAttribute="bottom" constant="20" id="dYR-m0-fSv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rrn-Uf-Li0" secondAttribute="trailing" constant="5" id="eLC-QX-LDz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rrn-Uf-Li0" secondAttribute="trailing" constant="5" id="ypB-bJ-6Z0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="femaleSwitch" destination="Arc-wd-G2c" id="v3l-bF-Dr4"/>
-                        <outlet property="genderStatusLabel" destination="vvk-nC-t9u" id="4sR-ZT-TMo"/>
+                        <outlet property="genderStatusLabel" destination="bFp-5C-KEw" id="gld-az-m6C"/>
                         <outlet property="maleSwitch" destination="6Lx-AN-ASP" id="IZk-yT-Yob"/>
                         <segue destination="ixr-rE-jXN" kind="unwind" identifier="unwind" unwindAction="prepareForUnwind:" id="P0y-ng-xKI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0c-vc-xFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2100" y="-275"/>
+            <point key="canvasLocation" x="2100" y="-275.71214392803603"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="paP-TY-LHQ">
