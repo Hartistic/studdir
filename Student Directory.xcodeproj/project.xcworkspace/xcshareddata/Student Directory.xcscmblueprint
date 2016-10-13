@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F7DAF33B57094E73E5D22FB413BCC8DCF9C1A6C0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F7DAF33B57094E73E5D22FB413BCC8DCF9C1A6C0" : 9223372036854775807,
+    "F88BE4F1D856B8E326B841D7B0F4C85AB1FCD566" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D6058CBA-2AE9-4B91-A88D-D184F1CC2D08",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F7DAF33B57094E73E5D22FB413BCC8DCF9C1A6C0" : "Student%20Directory\/",
+    "F88BE4F1D856B8E326B841D7B0F4C85AB1FCD566" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Student Directory",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Student Directory.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emtjoshhart\/StudentDirectory",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F7DAF33B57094E73E5D22FB413BCC8DCF9C1A6C0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emtjoshhart\/StudentDirectory",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F88BE4F1D856B8E326B841D7B0F4C85AB1FCD566"
+    }
+  ]
+}
