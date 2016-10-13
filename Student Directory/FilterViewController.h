@@ -10,4 +10,10 @@
 
 @interface FilterViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UISwitch *maleSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *femaleSwitch;
+@property (strong, nonatomic) IBOutlet UILabel *genderStatusLabel;
+- (IBAction)maleSwitchAction:(id)sender;
+- (IBAction)femaleSwitchAction:(id)sender;
+
 @end

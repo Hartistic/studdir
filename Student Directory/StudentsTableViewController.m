@@ -7,6 +7,10 @@
 //
 
 #import "StudentsTableViewController.h"
+#import <Parse/Parse.h>
+#import "FilterViewController.h"
+
+
 
 @interface StudentsTableViewController ()
 
@@ -14,85 +18,194 @@
 
 @implementation StudentsTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+@synthesize myTableView;
+
+
+
+//-------------------------------------------------------------------------------------------------------
+- (id)initWithCoder:(NSCoder *)aCoder
+//-------------------------------------------------------------------------------------------------------
+
+{
+    self = [super initWithCoder:aCoder];
+    if (self)
+    {
+        self.parseClassName = @"Students";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 10;
+    }
+    return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//-------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated
+//-------------------------------------------------------------------------------------------------------
+
+{
+    [super viewWillAppear:animated];
+    [ProgressHUD dismiss];
 }
 
-#pragma mark - Table view data source
+//-------------------------------------------------------------------------------------------------------
+- (void)viewDidLayoutSubviews
+//-------------------------------------------------------------------------------------------------------
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+{
+    [super viewDidLayoutSubviews];
+    self.tableView.contentInset = UIEdgeInsetsMake(30,0,0,0);
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
+//-------------------------------------------------------------------------------------------------------
+- (NSString *)cellIdentifierForIndexPath:(NSIndexPath *)indexPath
+//-------------------------------------------------------------------------------------------------------
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+{
+    NSString *cellIdentifier = nil;
     
-    // Configure the cell...
+    switch (indexPath.section)
+    {
+        case 0:
+            cellIdentifier = @"currentStudentsCell";
+            break;
+    }
     
+    return cellIdentifier;
+}
+
+//-------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//-------------------------------------------------------------------------------------------------------
+
+{
+    NSString *cellIdentifier = [self cellIdentifierForIndexPath:indexPath];
+    static NSMutableDictionary *heightCache;
+    if (!heightCache)
+        heightCache = [[NSMutableDictionary alloc] init];
+    NSNumber *cachedHeight = heightCache[cellIdentifier];
+    if (cachedHeight)
+        return cachedHeight.floatValue;
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    CGFloat height = cell.bounds.size.height;
+    heightCache[cellIdentifier] = @(height);
+    return height;
+}
+
+//-------------------------------------------------------------------------------------------------------
+- (void)refresh:(UIRefreshControl *)refreshControl
+//-------------------------------------------------------------------------------------------------------
+
+{
+    [refreshControl endRefreshing];
+}
+
+//-------------------------------------------------------------------------------------------------------
+- (PFQuery *)queryForTable
+//-------------------------------------------------------------------------------------------------------
+
+{
+    [ProgressHUD show:@"Refreshing"];
+    
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Students"];
+    if (_isMale == 1 && _isFemale == 1)
+    {
+        [ProgressHUD dismiss];
+        return query;
+    }
+    if (_isMale == 0 && _isFemale == 1)
+    {
+        [query whereKey:@"isMale" equalTo:[NSNumber numberWithBool:false]];
+        [ProgressHUD dismiss];
+        return query;
+    }
+    if (_isMale == 1 && _isFemale == 0)
+    {
+        [query whereKey:@"isMale" equalTo:[NSNumber numberWithBool:true]];
+        [ProgressHUD dismiss];
+        return query;
+    }
+    if (_isMale == 0 && _isFemale == 0)
+    {
+        [ProgressHUD dismiss];
+        return query;
+    }
+    else
+    {
+        [query orderByDescending:@"createdAt"];
+        [ProgressHUD dismiss];
+        return query;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+- (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object: (PFObject *)object
+//-------------------------------------------------------------------------------------------------------
+
+{
+    static NSString *myTableIdentifier = @"currentStudentsCell";
+    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableIdentifier];
+    if (cell == nil)
+    {
+        cell = [[StudentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableIdentifier];
+    }
+    
+    ////CONFIGURE THE CELL////
+
+    ////Student's Image must be given priority to load first////
+    PFImageView *studentImageView = [cell viewWithTag:101];
+    studentImageView.file = [object objectForKey:@"image"];
+    [studentImageView loadInBackground];
+    if (studentImageView.file == NULL)
+    {
+        studentImageView.image = [UIImage imageNamed:@"PlaceholderPhoto"];
+    }
+    
+    ////Now let's do the rest-->declared in StudentCell.h////
+    [cell configureCell:object];
+
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+//-------------------------------------------------------------------------------------------------------
+-(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue
+//-------------------------------------------------------------------------------------------------------
+
+{
+    if ([segue.identifier isEqualToString:@"unwind"])
+    {
+        [self loadObjects];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+//-------------------------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//-------------------------------------------------------------------------------------------------------
+
+{
+    if ([self.objects count] == indexPath.row)
+    {
+        [self loadNextPage];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+//-------------------------------------------------------------------------------------------------------
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath
+//-------------------------------------------------------------------------------------------------------
+
+{
+    static NSString *CellIdentifier = @"NextPage";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.textLabel.text = @"Tap to load more...";
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    return cell;
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
+

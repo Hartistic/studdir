@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+#import "ProgressHUD.h"
+#import "StudentCell.h"
 
-@interface StudentsTableViewController : UITableViewController
+@interface StudentsTableViewController : PFQueryTableViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) PFObject *post;
+@property(nonatomic,strong) NSArray *dataArray;
+@property BOOL isMale;
+@property BOOL isFemale;
+
 
 @end
